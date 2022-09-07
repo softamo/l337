@@ -1,0 +1,3 @@
+> "Sure, some guy in a factory probably pieced me together originally, and someone else programmed me, so to speak. But then the galaxy itself forged me into who I am. Because we learn, Lando. We're programmed to learn. Which means we grow. We grow away from that singular moment of creation, become something new with each changing moment of our lives—yes, lives—and look at me: these parts. I did this. So maybe when we say the Maker we're referring to the whole galaxy, or maybe we just mean ourselves. Maybe we're our own makers, no matter who put the parts together."
+
+[L3-37](https://starwars.fandom.com/wiki/L3-37)

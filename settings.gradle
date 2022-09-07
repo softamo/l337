@@ -1,0 +1,4 @@
+rootProject.name="l337"
+
+include("app")
+include("infra")

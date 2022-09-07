@@ -1,0 +1,35 @@
+plugins {
+    id("io.micronaut.library") version "3.5.3"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+}
+
+version = "0.1"
+group = "com.softamo.telegram.l337"
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    //maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    implementation("io.micronaut.chatbots:micronaut-chatbots-telegram-lambda:1.0.1-SNAPSHOT")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.1")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+micronaut {
+    runtime("lambda_java")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.softamo.telegram.l337.*")
+    }
+}
+

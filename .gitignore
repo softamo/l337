@@ -1,0 +1,17 @@
+Thumbs.db
+.DS_Store
+.gradle
+build/
+target/
+out/
+.micronaut/
+.idea
+*.iml
+*.ipr
+*.iws
+.project
+.settings
+.classpath
+.factorypath
+app/src/main/resources/application-ec2.yml
+infra/cdk.out
