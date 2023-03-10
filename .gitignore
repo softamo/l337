@@ -13,5 +13,5 @@ out/
 .settings
 .classpath
 .factorypath
-app/src/main/resources/application-ec2.yml
-infra/cdk.out
+app/src/main/resources/application-function.yml
+/infra/cdk.out

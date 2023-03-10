@@ -1,4 +1,4 @@
-package com.softamo.telegram.l337;
+package com.softamo.bots.l337.telegram;
 
 import io.micronaut.aws.cdk.function.MicronautFunction;
 import io.micronaut.aws.cdk.function.MicronautFunctionFile;
@@ -8,6 +8,11 @@ import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.Duration;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
+import software.amazon.awscdk.services.lambda.Architecture;
+import software.amazon.awscdk.services.lambda.CfnFunction;
+import software.constructs.IConstruct;
+import software.amazon.awscdk.services.lambda.Alias;
+import software.amazon.awscdk.services.lambda.Version;
 import software.amazon.awscdk.services.lambda.FunctionUrl;
 import software.amazon.awscdk.services.lambda.FunctionUrlAuthType;
 import software.amazon.awscdk.services.lambda.FunctionUrlOptions;
@@ -20,7 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AppStack extends Stack {
-    public static final String HANDLER = "io.micronaut.chatbots.telegram.lambda.Handler";
 
     public AppStack(final Construct parent, final String id) {
         this(parent, id, null);
@@ -35,20 +39,33 @@ public class AppStack extends Stack {
         Function function = MicronautFunction.create(ApplicationType.FUNCTION,
                 false,
                 this,
-                "l337-function-java11")
-                .handler(HANDLER)
+                        "telegram-l337-function")
+                .handler("io.micronaut.chatbots.telegram.lambda.Handler")
                 .environment(environmentVariables)
                 .code(Code.fromAsset(functionPath()))
                 .timeout(Duration.seconds(10))
-                .memorySize(512)
-                .tracing(Tracing.ACTIVE)
+                .memorySize(2048)
                 .logRetention(RetentionDays.ONE_WEEK)
+                .tracing(Tracing.DISABLED)
+                .architecture(Architecture.X86_64)
                 .build();
-        FunctionUrl functionUrl = function.addFunctionUrl(FunctionUrlOptions.builder()
+        IConstruct defaultChild = function.getNode().getDefaultChild();
+        if (defaultChild instanceof CfnFunction) {
+            CfnFunction cfnFunction = (CfnFunction) defaultChild;
+            cfnFunction.setSnapStart(CfnFunction.SnapStartProperty.builder()
+                .applyOn("PublishedVersions")
+                .build());
+        }
+        Version currentVersion = function.getCurrentVersion();
+        Alias prodAlias = Alias.Builder.create(this, "ProdAlias")
+                .aliasName("Prod")
+                .version(currentVersion)
+                .build();
+        FunctionUrl functionUrl = prodAlias.addFunctionUrl(FunctionUrlOptions.builder()
                 .authType(FunctionUrlAuthType.NONE)
                 .build());
-        CfnOutput.Builder.create(this, "L337Url")
-                .exportName("L337Url")
+        CfnOutput.Builder.create(this, "TelegramL337ApiUrl")
+                .exportName("TelegramL337ApiUrl")
                 .value(functionUrl.getUrl())
                 .build();
     }

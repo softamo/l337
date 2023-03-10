@@ -1,6 +1,6 @@
 applicationType: function
-defaultPackage: com.softamo.telegram.l337
+defaultPackage: com.softamo.bots.l337
 testFramework: junit
 sourceLanguage: java
 buildTool: gradle
-features: [annotation-api, app-name, aws-cdk, aws-lambda, aws-lambda-function-url, gradle, jackson-databind, java, junit, logback, micronaut-build, readme, shade, yaml]
+features: [annotation-api, app-name, aws-cdk, aws-lambda, aws-lambda-function-url, chatbots-telegram-lambda, gradle, jackson-databind, java, junit, logback, micronaut-build, readme, shade, snapstart, x86, yaml]

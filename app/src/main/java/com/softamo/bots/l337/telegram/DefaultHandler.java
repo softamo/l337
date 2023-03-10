@@ -1,9 +1,10 @@
-package com.softamo.telegram.l337;
+package com.softamo.bots.l337.telegram;
 
 import io.micronaut.chatbots.core.SpaceParser;
 import io.micronaut.chatbots.telegram.api.Chat;
 import io.micronaut.chatbots.telegram.api.Update;
 import io.micronaut.chatbots.telegram.api.send.SendMessage;
+import io.micronaut.chatbots.telegram.core.SendMessageUtils;
 import io.micronaut.chatbots.telegram.core.TelegramBotConfiguration;
 import io.micronaut.chatbots.telegram.core.TelegramHandler;
 import io.micronaut.core.annotation.NonNull;

@@ -1,5 +1,6 @@
-package com.softamo.telegram.l337;
+package com.softamo.bots.l337;
 
+import com.softamo.bots.l337.telegram.AppStack;
 import org.junit.jupiter.api.Test;
 import software.amazon.awscdk.App;
 import software.amazon.awscdk.assertions.Template;
@@ -11,7 +12,7 @@ class AppStackTest {
     @Test
     void testAppStack() {
         if (new File(AppStack.functionPath()).exists()) {
-            AppStack stack = new AppStack(new App(), "L337Stack");
+            AppStack stack = new AppStack(new App(), "TestMicronautAppStack");
             Template template = Template.fromStack(stack);
             template.hasResourceProperties("AWS::Lambda::Function", Collections.singletonMap("Handler", "io.micronaut.chatbots.telegram.lambda.Handler"));
         }

@@ -1,11 +1,11 @@
-package com.softamo.telegram.l337;
+package com.softamo.bots.l337.telegram;
 
 import software.amazon.awscdk.App;
 
 public class Main {
     public static void main(final String[] args) {
         App app = new App();
-        new AppStack(app, "L337Stack");
+        new AppStack(app, "TelegramL337");
         app.synth();
     }
 }
